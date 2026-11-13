@@ -2,84 +2,173 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Vehicle enquiry form and showroom contact number for Barry's Car Sales in Hatfield.">
     <title>Vehicle Enquiry - Barry's Car Sales</title>
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
 </head>
 <body>
-<header>
-    <div>
-        <div>
-            <h1>Barry's Car Sales</h1>
-            <div>Local quality used cars at sensible prices</div>
-        </div>
-        <div>Call 01707 111 222</div>
-    </div>
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="enquiry.html">Enquiry</a>
-    </nav>
-</header>
+    <!-- Skip link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
 
-<main>
-    <h2>Vehicle enquiry</h2>
-    <p>Complete the form below and a member of our team will contact you.</p>
-    <p>Fields marked in red are important.</p>
-
-    <form action="#" method="post">
-        <div>
-            <label for="car">Vehicle</label>
-            <select id="car" name="car">
-                <option value="">Choose a vehicle</option>
-                <option>2019 Hatch 1.0</option>
-                <option>2020 Trail 1.5</option>
-                <option>2018 Audi S4</option>
-                <option>2021 City-e</option>
-            </select>
-        </div>
-
-        <div>
-            <span>Full name</span>
-            <input type="text" name="name" placeholder="e.g. Dave Smith">
-        </div>
-
-        <div>
-            <label for="email">Email address</label>
-            <input type="text" id="email" name="email">
-        </div>
-
-        <div>
-            <label for="phone">Telephone</label>
-            <input type="text" id="phone" name="phone">
-        </div>
-
-        <div>
-            <label for="message">Your message</label>
-            <textarea id="message" name="message">Tell us what you would like to know...</textarea>
-        </div>
-
-        <div>
-            <input type="checkbox" id="updates" name="updates">
-            <span>Send me occasional offers and updates</span>
-        </div>
-
-        <div>
-            <label>Preferred contact method</label>
-            <div>
-                <input type="radio" name="contact" value="email"> Email
-                <input type="radio" name="contact" value="phone"> Phone
+    <header class="site-header" role="banner">
+        <div class="header-container">
+            <div class="brand-group">
+                <h1 class="site-title">Barry's Car Sales</h1>
+                <p class="site-tagline">Local quality used cars at sensible prices</p>
+            </div>
+            <div class="header-contact">
+                <span class="contact-label">Telephone:</span>
+                <a href="tel:01707111222" class="phone-link" aria-label="Call Barry's Car Sales on 01707 111 222">
+                    <span aria-hidden="true">&#9742;</span> 01707 111 222
+                </a>
             </div>
         </div>
+        
+        <nav class="site-nav" aria-label="Main Navigation">
+            <ul class="nav-list">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="about.html" class="nav-link">About Us</a></li>
+                <li><a href="enquiry.html" class="nav-link active" aria-current="page">Vehicle Enquiry</a></li>
+            </ul>
+        </nav>
+    </header>
 
-        <button type="submit">SUBMIT</button>
-    </form>
+    <main id="main-content" class="main-content" tabindex="-1">
+        <section class="form-section" aria-labelledby="enquiry-heading">
+            <h2 id="enquiry-heading">Vehicle enquiry</h2>
+            <p>Use this offline demo to check a sample vehicle enquiry. All details stay in your browser.</p>
 
-    <p>We aim to respond within two working days.</p>
-</main>
+            <p class="required-note">
+                Fields marked with an asterisk (<span class="required-mark" aria-hidden="true">*</span>) are mandatory.
+            </p>
 
-<footer>
-    Barry's Car Sales · 15 Chipmunk Close, Hatfield, Hertfordshire · 01707 111 222
-</footer>
+            <!-- Error summary -->
+            <div id="error-summary" class="error-summary" role="alert" aria-labelledby="error-summary-title" tabindex="-1" hidden>
+                <h3 id="error-summary-title">Please correct the following errors before submitting:</h3>
+                <ul id="error-list" class="error-list"></ul>
+            </div>
+
+            <!-- Success message -->
+            <div id="submission-success" class="submission-success" role="status" aria-live="polite" tabindex="-1" hidden>
+                <h3>Enquiry checked</h3>
+                <p id="success-feedback-text">Your sample enquiry passed the form checks.</p>
+                <button type="button" class="btn btn-secondary" id="btn-reset-form" style="margin-top: 1rem;">Send another enquiry</button>
+            </div>
+
+            <!-- No-JS fallback -->
+            <noscript>
+                <style>
+                    #enquiry-form { display: none !important; }
+                </style>
+                <div class="noscript-notice" role="region" aria-label="JavaScript requirement notice">
+                    <p><strong>JavaScript is off:</strong> Because this coursework demo has no backend server, the offline validation check needs JavaScript enabled in your browser.</p>
+                    <p>To ask about a car, book a viewing, or discuss part exchange, call our showroom on <a href="tel:01707111222">01707 111 222</a> instead.</p>
+                </div>
+            </noscript>
+
+            <form id="enquiry-form" action="#" method="post">
+                <div class="form-group" id="group-car">
+                    <label for="car" class="form-label">Vehicle of interest (optional)</label>
+                    <select id="car" name="car" class="form-control" aria-describedby="car-help">
+                        <option value="">-- Choose a vehicle from current stock --</option>
+                        <option value="2019 Hatch 1.0">2019 Hatch 1.0 (&pound;8,495)</option>
+                        <option value="2020 Trail 1.5">2020 Trail 1.5 (&pound;12,950)</option>
+                        <option value="2018 Audi S4">2018 Audi S4 (&pound;9,250)</option>
+                        <option value="2021 City-e">2021 City-e (&pound;14,995)</option>
+                        <option value="general">Other / General enquiry</option>
+                    </select>
+                    <span id="car-help" class="field-hint">If you are contacting us about a specific vehicle, select it here.</span>
+                </div>
+
+                <div class="form-group" id="group-name">
+                    <label for="full-name" class="form-label">
+                        Full name <span class="required-mark" aria-hidden="true">*</span>
+                        <span class="sr-only">(required)</span>
+                    </label>
+                    <input type="text" id="full-name" name="name" class="form-control" autocomplete="name" required aria-required="true" aria-describedby="name-hint name-error" placeholder="e.g. Dave Smith">
+                    <span id="name-hint" class="field-hint">Please provide your full name.</span>
+                    <span id="name-error" class="field-error"></span>
+                </div>
+
+                <div class="form-group" id="group-email">
+                    <label for="email" class="form-label">
+                        Email address <span class="required-mark" aria-hidden="true">*</span>
+                        <span class="sr-only">(required)</span>
+                    </label>
+                    <input type="email" id="email" name="email" class="form-control" autocomplete="email" required aria-required="true" aria-describedby="email-hint email-error" placeholder="e.g. dave.smith@example.co.uk">
+                    <span id="email-hint" class="field-hint">Use a sample email address such as driver@example.com.</span>
+                    <span id="email-error" class="field-error"></span>
+                </div>
+
+                <div class="form-group" id="group-phone">
+                    <label for="phone" class="form-label" id="phone-label">
+                        Telephone number
+                        <span id="phone-required-indicator" class="phone-required-indicator" style="display: none;">
+                            <span class="required-mark" aria-hidden="true">*</span>
+                            <span class="sr-only">(required)</span>
+                        </span>
+                    </label>
+                    <input type="tel" id="phone" name="phone" class="form-control" autocomplete="tel" aria-describedby="phone-hint phone-error" placeholder="e.g. 01707 111 222 or 07700 900 123">
+                    <span id="phone-hint" class="field-hint">Required if you select phone as your preferred contact method.</span>
+                    <span id="phone-error" class="field-error"></span>
+                </div>
+
+                <div class="form-group" id="group-message">
+                    <label for="message" class="form-label">
+                        Your message <span class="required-mark" aria-hidden="true">*</span>
+                        <span class="sr-only">(required)</span>
+                    </label>
+                    <textarea id="message" name="message" class="form-control form-textarea" rows="5" required aria-required="true" aria-describedby="message-hint message-error" placeholder="Write your enquiry about a viewing, part exchange, or finance (at least 10 characters)..."></textarea>
+                    <span id="message-hint" class="field-hint">Tell us what you would like to know.</span>
+                    <span id="message-error" class="field-error"></span>
+                </div>
+
+                <div class="form-group checkbox-group">
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="updates" name="updates" value="yes" class="form-checkbox">
+                        <label for="updates" class="checkbox-label">Send me occasional vehicle offers, stock arrivals, and promotions</label>
+                    </div>
+                </div>
+
+                <fieldset class="form-group fieldset-contact" id="group-contact" aria-describedby="contact-method-hint">
+                    <legend class="form-label legend-label">
+                        Preferred contact method <span class="required-mark" aria-hidden="true">*</span>
+                        <span class="sr-only">(required)</span>
+                    </legend>
+                    <span id="contact-method-hint" class="field-hint">Choose how you would like our Hatfield team to reply.</span>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="contact-email" name="contact" value="email" class="form-radio" checked>
+                            <label for="contact-email" class="radio-label">Email</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="contact-phone" name="contact" value="phone" class="form-radio">
+                            <label for="contact-phone" class="radio-label">Phone</label>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary btn-submit">Check enquiry</button>
+                    <button type="reset" class="btn btn-secondary btn-reset">Clear Form</button>
+                </div>
+            </form>
+
+            <p class="response-note">For an actual enquiry, use the showroom telephone number.</p>
+        </section>
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="footer-container">
+            <p class="footer-address">
+                <strong>Barry's Car Sales</strong> &middot; 15 Chipmunk Close, Hatfield, Hertfordshire &middot; 
+                <a href="tel:01707111222">01707 111 222</a>
+            </p>
+            <p class="footer-hours">Opening hours: Mon&ndash;Fri 9:00&ndash;17:30 | Sat 9:00&ndash;16:00 | Sun Closed</p>
+            <p class="footer-copy">&copy; 2026 Barry's Car Sales. All rights reserved.</p>
+        </div>
+    </footer>
 </body>
 </html>
