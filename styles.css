@@ -83,6 +83,7 @@ body {
     background: var(--primary-color);
     color: #ffffff;
     padding: 20px;
+    border-bottom: 4px solid var(--accent-color);
 }
 
 .header-container {
@@ -741,6 +742,10 @@ p {
         align-items: flex-start;
     }
 
+    .brand-group {
+        flex: none;
+        width: 100%;
+    }
     
     .nav-list {
         flex-direction: column;

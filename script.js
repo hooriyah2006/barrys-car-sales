@@ -16,6 +16,7 @@ function initQueryParamAutoSelection() {
         for (var i = 0; i < carSelect.options.length; i++) {
             var opt = carSelect.options[i];
             var val = opt.value.toLowerCase().trim();
+            if (!val) continue; // skip blank placeholder so indexOf("") does not match 0
             if (val === query || val.indexOf(query) !== -1 || query.indexOf(val) !== -1) {
                 carSelect.selectedIndex = i;
                 opt.selected = true;
@@ -169,7 +170,12 @@ function initAccessibleFormValidation() {
                     field: messageField,
                     message: "Enter your enquiry message."
                 });
-            } 
+            } else if (msgVal.length < 10) {
+                errors.push({
+                    field: messageField,
+                    message: "Enter your enquiry message (minimum 10 characters)."
+                });
+            }
         }
 
         if (errors.length > 0) {
